@@ -37,4 +37,9 @@ class ScriptEditor extends Field
         return json_encode($this->evaluate($this->modes));
     }
 
+    public function getTheme($type = 'light')
+    {
+        return config('filament-scripteditor.theme.' . $type, 'default');
+    }
+
 }

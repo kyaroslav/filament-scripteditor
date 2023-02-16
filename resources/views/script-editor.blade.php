@@ -10,58 +10,54 @@
 >
     <div class="w-full" x-data="{
             state: $wire.entangle('{{ $getStatePath() }}'),
-            isJson: {{ json_encode($getJsonFormatted()) }},
             get formattedState() {
-                return this.isJson ? this.state : JSON.parse(this.state)
+                return this.state;
             }
         }"
          x-init="$nextTick(() => {
-        const options = {
-            modes: {{ $getModes() }},
-            history: true,
-            onChange: function(){
-            },
-            onChangeJSON: function(json){
-                state=JSON.stringify(json);
-            },
-            onChangeText: function(jsonString){
-                state=jsonString;
-            },
-            onValidationError: function (errors) {
-                errors.forEach((error) => {
-                  switch (error.type) {
-                    case 'validation': // schema validation error
-                      break;
-                    case 'error':  // json parse error
-                        console.log(error.message);
-                      break;
-                  }
-                })
-            }
-        };
-        if(typeof json_editor !== 'undefined'){
-            //json_editor = new ScriptEditor($refs.editor, options);
-            //json_editor.set(formattedState);
-        }else{
-            //let json_editor = new ScriptEditor($refs.editor, options);
-            //json_editor.set(formattedState);
+        if (typeof script_editor !== 'undefined') {
+            script_editor = ace.edit($refs.editor);
+            script_editor.setTheme('ace/theme/twilight');
+            script_editor.session.setMode('ace/mode/javascript');
+            script_editor.setValue(formattedState);
+            script_editor.session.on('change', function(delta) {
+                state = script_editor.getSession().getValue();
+            });
+        } else {
+            let script_editor = ace.edit($refs.editor);
+            script_editor.setTheme('ace/theme/twilight');
+            script_editor.session.setMode('ace/mode/javascript');
+            script_editor.setValue(formattedState);
+            script_editor.session.on('change', function(delta) {
+                state = script_editor.getSession().getValue();
+            });
         }
 
-        var editor = ace.edit('editor');
-        editor.setTheme('ace/theme/twilight');
-        editor.session.setMode('ace/mode/javascript');
-
+        script_editor.setOptions({
+            maxLines: 30,
+            minLines: 30,
+            autoScrollEditorIntoView: true,
+        });
     })"
          x-cloak
          wire:ignore>
-
-        <pre x-ref="editor" id="editor" class="w-full ace_editor" style="min-height: 30vh;height:{{ $getHeight() }}px">function foo(items) {
-            var i;
-            for (i = 0; i &lt; items.length; i++) {
-                alert("Ace Rocks " + items[i]);
-            }
-        }</pre>
+        <pre x-ref="editor" id="editor" class="w-full ace_editor" style="min-height: 30vh;height:{{ $getHeight() }}px"></pre>
 
     </div>
 </x-forms::field-wrapper>
+
+@once
+
+{{--    {{ config('filament-simple-highlight-field.theme', 'default') }}--}}
+
+    @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.1/ace.js" integrity="sha512-CfVYqNC369iSfGgZbSujTgySaSOMo+zxwXu2s9hNKiWmPGFNpXZn69kJ9tLMfwKGtZk86ZufAN1Q9EVranSAaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+        <script type="text/javascript">
+            window.addEventListener('DOMContentLoaded', function() {
+                console.log('script-editor DOMContentLoaded');
+            });
+        </script>
+    @endpush
+@endonce
 

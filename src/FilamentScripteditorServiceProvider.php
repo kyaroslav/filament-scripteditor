@@ -13,14 +13,14 @@ class FilamentScripteditorServiceProvider extends PluginServiceProvider
      * @var string[]
      */
     protected array $scripts = [
-        'filament-scripteditor' => __DIR__ . '/../dist/scripteditor/jsoneditor.min.js',
+        //'filament-scripteditor' => __DIR__ . '/../dist/scripteditor/jsoneditor.min.js',
     ];
 
     /**
      * @var string[]
      */
     protected array $styles = [
-        'filament-scripteditor' => __DIR__ . '/../dist/scripteditor/jsoneditor.min.css',
+        //'filament-scripteditor' => __DIR__ . '/../dist/scripteditor/jsoneditor.min.css',
     ];
 
     public function configurePackage(Package $package): void

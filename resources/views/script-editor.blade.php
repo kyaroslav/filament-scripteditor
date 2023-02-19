@@ -15,12 +15,18 @@
                 }
          }"
          x-init="$nextTick(() => {
+            const theme = localStorage.getItem('theme');
+
             if (typeof script_editor !== 'undefined') {
                 script_editor = ace.edit($refs.editor);
             } else {
                 var script_editor = ace.edit($refs.editor);
             }
-            script_editor.setTheme('{{ $getTheme() }}');
+            if (theme === 'light') {
+                script_editor.setTheme('{{ $getTheme('light') }}');
+            } else {
+                script_editor.setTheme('{{ $getTheme('dark') }}');
+            }
             script_editor.session.setMode('ace/mode/tcl');
             script_editor.setValue(formattedState, -1);
             script_editor.clearSelection(); // remove the highlight over the text
@@ -33,8 +39,7 @@
                 autoScrollEditorIntoView: true,
             });
         })"
-         x-data="{ mode: 'light' }"
-         x-on:dark-mode-toggled.window="editorSwitchTheme($event.detail);"
+         x-on:dark-mode-toggled.window="editorSwitchTheme($event.detail, $refs.editor);"
          x-cloak
          wire:ignore>
         <pre x-ref="editor" id="editor" class="w-full ace_editor"
@@ -52,8 +57,15 @@
             window.addEventListener('DOMContentLoaded', function() {
                 console.log('script-editor DOMContentLoaded');
             });
-            function editorSwitchTheme(mode) {
-                console.log(mode);
+            function editorSwitchTheme(theme, refs_editor) {
+                let script_editor = ace.edit(refs_editor);
+                if (typeof script_editor !== 'undefined') {
+                    if (theme === 'light') {
+                        script_editor.setTheme('{{ $getTheme('light') }}');
+                    } else {
+                        script_editor.setTheme('{{ $getTheme('dark') }}');
+                    }
+                }
             }
         </script>
     @endpush

@@ -35,8 +35,8 @@
             });
             script_editor.setOptions({
                 enableBasicAutocompletion: true,
-                minLines: 30,
-                autoScrollEditorIntoView: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: false
             });
         })"
          x-on:dark-mode-toggled.window="editorSwitchTheme($event.detail, $refs.editor);"
@@ -52,7 +52,7 @@
 @once
     @push('scripts')
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.1/ace.js" integrity="sha512-CfVYqNC369iSfGgZbSujTgySaSOMo+zxwXu2s9hNKiWmPGFNpXZn69kJ9tLMfwKGtZk86ZufAN1Q9EVranSAaA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.15.2/ext-language_tools.min.js" integrity="sha512-jwHjfXzlZZWm/JrYIjGauBO9fNDoxtrl5uVEh8SVu5nZGO38FCFiHx7N5NfLQWsi+cjT4vQcZl9UNLc3oCm+TA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script type="text/javascript">
             window.addEventListener('DOMContentLoaded', function() {
                 console.log('script-editor DOMContentLoaded');

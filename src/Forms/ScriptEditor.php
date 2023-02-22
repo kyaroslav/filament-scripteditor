@@ -37,6 +37,11 @@ class ScriptEditor extends Field
         return json_encode($this->evaluate($this->modes));
     }
 
+    public function getMaxTextSize()
+    {
+        return config('filament-scripteditor.max-text-size', 1024);
+    }
+
     public function getTheme($type = 'light')
     {
         return config('filament-scripteditor.theme.' . $type, 'default');

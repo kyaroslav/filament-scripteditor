@@ -1,6 +1,6 @@
 {
     "name": "kyaroslav/filament-scripteditor",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Filament's Script Editor input",
     "keywords": [
         "laravel",
@@ -20,10 +20,10 @@
         "php": "^8.0",
         "filament/filament": "^2.0",
         "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^8.74|^9.0"
+        "illuminate/contracts": "^10.0"
     },
     "require-dev": {
-        "nunomaduro/collision": "^6.0",
+        "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.0.1",
         "orchestra/testbench": "^7.0",
         "pestphp/pest": "^1.21",
@@ -31,7 +31,7 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^10.0"
     },
     "autoload": {
         "psr-4": {

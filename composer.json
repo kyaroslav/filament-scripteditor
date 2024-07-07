@@ -1,5 +1,6 @@
 {
     "name": "kyaroslav/filament-scripteditor",
+    "version": "1.0.0",
     "description": "Filament's Script Editor input",
     "keywords": [
         "laravel",

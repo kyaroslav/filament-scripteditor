@@ -30,5 +30,9 @@ class FilamentScripteditorServiceProvider extends PluginServiceProvider
             ->hasConfigFile()
             ->hasAssets()
             ->hasViews();
+
+        $this->publishes([
+            __DIR__ . '/../dist/scripteditor/img/aceeditor-icons.svg' => public_path('filament/assets/img/aceeditor-icons.svg'),
+        ], 'filament-scripteditor');
     }
 }
